@@ -7,7 +7,7 @@ namespace ForumApp2.Controllers
 {
     [ApiController]
     [Route("api/admin")]
-    [Authorize(Roles = "Administrator")]
+   // [Authorize(Roles = "Administrator")]
     public class AdminController : ControllerBase
     {
         private readonly IAdminTopicRepository _adminTopicRepository;

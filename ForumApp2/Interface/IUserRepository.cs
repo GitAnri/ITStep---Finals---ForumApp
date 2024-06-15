@@ -15,8 +15,6 @@ namespace ForumApp2.Interface
         Task CreateTopicAsync(Topic topic);
     }
 
-    //Task BanUserAsync(int userId);
-    //Task UnbanUserAsync(int userId);
 }
 
 

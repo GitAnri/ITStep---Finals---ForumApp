@@ -77,7 +77,6 @@ namespace ForumApp2.Controllers
         [HttpPost("registerUser")]
         public async Task<IActionResult> RegisterUser(RegisterUserDto request)
         {
-            // Validate the input
             if (string.IsNullOrWhiteSpace(request.Username))
             {
                 return BadRequest(new { code = "InvalidUserName", description = "Username cannot be empty." });
@@ -170,7 +169,7 @@ namespace ForumApp2.Controllers
 
             var token = new JwtSecurityToken(
                 claims: claims,
-                expires: DateTime.Now.AddMinutes(60), // Adjust token expiration as needed
+                expires: DateTime.Now.AddMinutes(60), 
                 signingCredentials: creds
             );
 

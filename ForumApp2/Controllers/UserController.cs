@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Security.Claims;
 using System.Threading.Tasks;
 using AutoMapper;
 using ForumApp2.DTOs;
@@ -37,7 +38,7 @@ public class UserController : ControllerBase
         }
 
 
-        var author = User.Identity.IsAuthenticated ? User.Identity.Name : "Anonymous";
+        var author = "User";
 
         var topic = new Topic
         {
@@ -97,7 +98,7 @@ public class UserController : ControllerBase
             return BadRequest();
         }
 
-        var author = User.Identity.IsAuthenticated ? User.Identity.Name : "Anonymous";
+        var author = "User";
 
 
         var comment = _mapper.Map<Comment>(commentDto);
