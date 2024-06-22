@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.Design;
 using System.Linq;
 using System.Threading.Tasks;
 using ForumApp2.Data;
@@ -28,18 +29,17 @@ public class UserRepository : IUserRepository
 
     public async Task<Topic> GetTopicByIdAsync(int topicId)
     {
-        return await _context.Topics.FindAsync(topicId);
+        return await _context.Topics
+            .Include(t => t.Comments)
+            .FirstOrDefaultAsync(t => t.Id == topicId);
     }
+
 
     public async Task<IEnumerable<Topic>> GetAllTopicsAsync()
     {
         return await _context.Topics.ToListAsync();
     }
 
-    public async Task<IEnumerable<Comment>> GetCommentsByTopicIdAsync(int topicId)
-    {
-        return await _context.Comments.Where(c => c.TopicId == topicId).ToListAsync();
-    }
 
     public async Task CreateCommentAsync(Comment comment)
     {
@@ -65,6 +65,16 @@ public class UserRepository : IUserRepository
         if (comment != null)
         {
             _context.Comments.Remove(comment);
+            await _context.SaveChangesAsync();
+        }
+    }
+
+    public async Task DeleteTopicAsync(int id)
+    {
+        var topic = await _context.Topics.FindAsync(id);
+        if (topic != null)
+        {
+            _context.Topics.Remove(topic);
             await _context.SaveChangesAsync();
         }
     }

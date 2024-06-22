@@ -38,7 +38,7 @@ namespace ForumApp2.Controllers
         }
 
         [HttpPost("registerAdmin")]
-        public async Task<IActionResult> RegisterAdmin(RegisterAdminDto request)
+        public async Task<IActionResult> RegisterAdmin([FromForm]RegisterAdminDto request)
         {
             if (string.IsNullOrWhiteSpace(request.Adminname))
             {
@@ -75,7 +75,7 @@ namespace ForumApp2.Controllers
         }
 
         [HttpPost("registerUser")]
-        public async Task<IActionResult> RegisterUser(RegisterUserDto request)
+        public async Task<IActionResult> RegisterUser([FromForm]RegisterUserDto request)
         {
             if (string.IsNullOrWhiteSpace(request.Username))
             {
@@ -120,7 +120,7 @@ namespace ForumApp2.Controllers
 
 
         [HttpPost("loginAdmin")]
-        public async Task<IActionResult> LoginAdmin(LoginAdminDto request)
+        public async Task<IActionResult> LoginAdmin([FromForm] LoginAdminDto request)
         {
             var admin = await _userManager.FindByNameAsync(request.Adminname);
 
@@ -136,12 +136,15 @@ namespace ForumApp2.Controllers
         }
 
         [HttpPost("loginUser")]
-        public async Task<IActionResult> LoginUser(LoginUserDto request)
+        public async Task<IActionResult> LoginUser([FromForm] LoginUserDto request)
         {
             var user = await _userManager.FindByNameAsync(request.UserName);
 
             if (user == null)
                 return BadRequest("User not found");
+            if (user.IsBanned)
+
+                return BadRequest("User is banned. Contact support for assistance.");
 
             if (!VerifyPasswordHash(request.Password, user.PasswordHash, user.PasswordSalt))
                 return BadRequest("Wrong password");

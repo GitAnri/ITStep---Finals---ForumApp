@@ -6,11 +6,11 @@ namespace ForumApp2.Interface
     {
         Task<IEnumerable<Topic>> GetAllTopicsAsync();
         Task<Topic> GetTopicByIdAsync(int topicId);
-        Task ChangeTopicStateAsync(int topicId, String newState);
+        Task ChangeTopicStateAsync(int topicId, TopicState newState);
         Task ChangeTopicStatusAsync(int topicId, TopicStatus newStatus);
         Task<IEnumerable<ApplicationUser>> GetAllUsersAsync();
-        Task BanUserAsync(int userId);
-        Task UnbanUserAsync(int userId);
+        Task BanUserAsync(string userId);
+        Task UnbanUserAsync(string userId);
     }
 
 }

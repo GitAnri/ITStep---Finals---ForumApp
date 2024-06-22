@@ -1,10 +1,8 @@
 ﻿namespace ForumApp2.DTOs
 {
-    public class TopicDto
+    public class CommentUpdateDto
     {
-        public string Title { get; set; }
+        public int Id { get; set; }
         public string Content { get; set; }
     }
-
-
 }

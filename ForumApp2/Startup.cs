@@ -61,7 +61,6 @@ namespace ForumApp2
             services.AddScoped<IAdminTopicRepository, AdminTopicRepository>();
             services.AddScoped<IUserRepository, UserRepository>();
             services.AddScoped<ITopicRepository, TopicRepository>();
-            services.AddScoped<ICommentRepository, CommentRepository>();
 
  
             services.AddControllers()

@@ -26,7 +26,7 @@ namespace ForumApp2.Background
 
                     var topicsToUpdate = context.Topics
                         .Include(t => t.Comments)
-                        .Where(t => t.Comments.OrderByDescending(c => c.CreatedAt).FirstOrDefault().CreatedAt < thresholdDate && t.Status == TopicStatus.Active);
+                        .Where(t => t.Comments.OrderByDescending(c => c.CreationDate).FirstOrDefault().CreationDate < thresholdDate && t.Status == TopicStatus.Active);
 
                     foreach (var topic in topicsToUpdate)
                     {

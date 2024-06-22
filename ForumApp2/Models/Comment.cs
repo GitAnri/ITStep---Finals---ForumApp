@@ -8,7 +8,6 @@
         public string Author { get; set; }
         public int TopicId { get; set; }
         public Topic Topic { get; set; }
-        public DateTime CreatedAt { get; set; }
     }
 
 

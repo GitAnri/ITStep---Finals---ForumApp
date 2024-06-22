@@ -25,8 +25,11 @@ namespace ForumApp2.Repositories
 
         public async Task<Topic> GetTopicByIdAsync(int topicId)
         {
-            return await _context.Topics.FindAsync(topicId);
+            return await _context.Topics
+                .Include(t => t.Comments)
+                .FirstOrDefaultAsync(t => t.Id == topicId);
         }
+
 
 
         public async Task UpdateTopicAsync(Topic topic)

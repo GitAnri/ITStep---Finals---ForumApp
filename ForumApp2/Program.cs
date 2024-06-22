@@ -56,7 +56,7 @@ builder.Services.AddSwaggerGen();
 builder.Services.AddScoped<IAdminTopicRepository, AdminTopicRepository>();
 builder.Services.AddScoped<IUserRepository, UserRepository>();
 builder.Services.AddScoped<ITopicRepository, TopicRepository>();
-builder.Services.AddScoped<ICommentRepository, CommentRepository>();
+
 
 builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 

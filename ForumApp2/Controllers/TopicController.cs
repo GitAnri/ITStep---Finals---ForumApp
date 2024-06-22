@@ -1,4 +1,6 @@
-﻿using ForumApp2.Interface;
+﻿using AutoMapper;
+using ForumApp2.DTOs;
+using ForumApp2.Interface;
 using ForumApp2.Models;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -12,31 +14,35 @@ namespace ForumApp2.Controllers
     [Route("api/[controller]")]
     public class TopicController : ControllerBase
     {
-        private readonly ITopicRepository _topicRepository;
+        private readonly IUserRepository _userRepository;
+        private readonly IMapper _mapper;
 
 
-        public TopicController(ITopicRepository topicRepository)
+        public TopicController(IUserRepository userRepository, IMapper mapper)
         {
-            _topicRepository = topicRepository;
+           _mapper = mapper;
+            _userRepository = userRepository;
         }
 
 
-        [HttpGet("GetAllTopics")]
+        [HttpGet("GetAlltopics")]
         public async Task<IActionResult> GetAllTopics()
         {
-            var topics = await _topicRepository.GetAllTopicsAsync();
-            return Ok(topics);
+            var topics = await _userRepository.GetAllTopicsAsync();
+            var topicDtos = _mapper.Map<IEnumerable<TopicPostDto>>(topics);
+            return Ok(topicDtos);
         }
 
         [HttpGet("GetTopicById/{id}")]
         public async Task<IActionResult> GetTopicById(int id)
         {
-            var topic = await _topicRepository.GetTopicByIdAsync(id);
+            var topic = await _userRepository.GetTopicByIdAsync(id);
             if (topic == null)
             {
                 return NotFound();
             }
-            return Ok(topic);
+            var topicDto = _mapper.Map<TopicGetDto>(topic);
+            return Ok(topicDto);
         }
     }
 

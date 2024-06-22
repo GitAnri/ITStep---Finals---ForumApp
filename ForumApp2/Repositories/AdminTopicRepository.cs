@@ -25,7 +25,7 @@ namespace ForumApp2.Repositories
             return await _context.Topics.FindAsync(topicId);
         }
 
-        public async Task ChangeTopicStateAsync(int topicId, String newState)
+        public async Task ChangeTopicStateAsync(int topicId, TopicState newState)
         {
             var topic = await _context.Topics.FindAsync(topicId);
             if (topic != null)
@@ -50,7 +50,7 @@ namespace ForumApp2.Repositories
             return await _context.Users.ToListAsync();
         }
 
-        public async Task BanUserAsync(int userId)
+        public async Task BanUserAsync(string userId)
         {
             var user = await _context.Users.FindAsync(userId);
             if (user != null)
@@ -60,7 +60,7 @@ namespace ForumApp2.Repositories
             }
         }
 
-        public async Task UnbanUserAsync(int userId)
+        public async Task UnbanUserAsync(string userId)
         {
             var user = await _context.Users.FindAsync(userId);
             if (user != null)
